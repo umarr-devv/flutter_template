@@ -36,13 +36,22 @@ class _InitScreenState extends State<InitScreen> {
         return Scaffold(
           body: Align(
             alignment: Alignment.center,
-            child: SizedBox(
-              height: 6,
-              width: 96,
-              child: LinearProgressIndicator(
-                minHeight: 4,
-                value: state.progress,
-              ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 4,
+                  width: 96,
+                  child: LinearProgressIndicator(
+                    minHeight: 4,
+                    value: state.progress,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text('${(state.progress * 100).toStringAsFixed(0)}%'),
+              ],
             ),
           ),
         );

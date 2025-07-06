@@ -5,22 +5,27 @@ import 'package:app/data/repositories/repositories.dart';
 import 'package:app/service/api_client/api_client.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 Future<void> main() async {
-  await initDependencies();
   runZonedGuarded(
     () async {
+      await initDependencies();
       runApp(AppScreen());
     },
     (exc, st) {
-      Talker().error('An error occurred in the app');
+      Talker().error(exc, st);
     },
   );
 }
 
 Future initDependencies() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await dotenv.load(fileName: ".env");
+
   final talker = Talker(
     settings: TalkerSettings(
       enabled: true,

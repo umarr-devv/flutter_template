@@ -1,20 +1,18 @@
-import 'package:app/shared/theme/theme.dart';
+import 'package:app/blocs/cubit/theme_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     return SliverAppBar(
       expandedHeight: 200,
       toolbarHeight: 64,
       pinned: true,
       floating: true,
       snap: true,
-      backgroundColor: theme.custom.primaryBackground,
-      surfaceTintColor: theme.custom.primaryBackground,
       flexibleSpace: FlexibleSpaceBar(
         background: Container(),
         title: Text('Главная'),
@@ -22,7 +20,12 @@ class HomeAppBar extends StatelessWidget {
       ),
       elevation: 8,
       actions: [
-        IconButton(icon: const Icon(Icons.notifications), onPressed: () {}),
+        IconButton(
+          icon: const Icon(Icons.dark_mode),
+          onPressed: () {
+            BlocProvider.of<ThemeCubit>(context).toggleTheme();
+          },
+        ),
       ],
     );
   }
