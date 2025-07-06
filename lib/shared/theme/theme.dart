@@ -48,7 +48,27 @@ class CustomThemeData {
         onSecondary: secondaryForeground,
         surface: secondaryBackground,
         onSurface: primaryForeground,
-      ).copyWith(secondary: secondaryForeground),
+      ),
+      textTheme: TextTheme(
+        titleLarge: TextStyle(
+          fontFamily: font,
+          color: primaryForeground,
+          fontWeight: FontWeight.w600,
+          fontSize: 18,
+        ),
+        titleMedium: TextStyle(
+          fontFamily: font,
+          color: primaryForeground,
+          fontWeight: FontWeight.w600,
+          fontSize: 16,
+        ),
+        titleSmall: TextStyle(
+          fontFamily: font,
+          color: primaryForeground,
+          fontWeight: FontWeight.w600,
+          fontSize: 12,
+        ),
+      ),
     );
   }
 }
