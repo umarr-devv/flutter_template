@@ -18,7 +18,7 @@ class CustomThemeData {
   }
 
   Color get secondaryBackground {
-    return by(light: const Color(0xFFeeeff0), dark: const Color(0xFF090909));
+    return by(light: const Color(0xFFeeeff0), dark: const Color(0xFF181818));
   }
 
   Color get primaryForeground {
@@ -34,6 +34,11 @@ class CustomThemeData {
       primaryColor: primaryBackground,
       scaffoldBackgroundColor: secondaryBackground,
       fontFamily: font,
+      appBarTheme: AppBarTheme(
+        backgroundColor: primaryBackground,
+        surfaceTintColor: primaryBackground,
+        iconTheme: IconThemeData(color: primaryForeground),
+      ),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         backgroundColor: primaryBackground,
         showSelectedLabels: false,
@@ -41,6 +46,7 @@ class CustomThemeData {
         type: BottomNavigationBarType.fixed,
       ),
       colorScheme: ColorScheme.fromSeed(
+        brightness: brightness,
         seedColor: primaryColor,
         primary: primaryBackground,
         onPrimary: primaryForeground,
