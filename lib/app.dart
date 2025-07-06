@@ -7,7 +7,7 @@ import 'package:get_it/get_it.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 
 class AppScreen extends StatefulWidget {
-  AppScreen({super.key});
+  const AppScreen({super.key});
 
   @override
   State<AppScreen> createState() => _AppScreenState();
