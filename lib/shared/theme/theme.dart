@@ -11,10 +11,10 @@ class CustomThemeData {
     return brightness == Brightness.light ? light : dark;
   }
 
-  Color get primaryColor => Color(0xffad46ff);
+  Color get primaryColor => Color(0xff6200ee);
 
   Color get primaryBackground {
-    return Color(0xff6200ee);
+    return by(light: const Color(0xFFffffff), dark: const Color(0xFF000000));
   }
 
   Color get secondaryBackground {
@@ -29,10 +29,17 @@ class CustomThemeData {
 
   ThemeData toTheme() {
     return ThemeData(
+      useMaterial3: true,
       brightness: brightness,
       primaryColor: primaryBackground,
       scaffoldBackgroundColor: secondaryBackground,
       fontFamily: font,
+      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+        backgroundColor: primaryBackground,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+      ),
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryColor,
         primary: primaryBackground,

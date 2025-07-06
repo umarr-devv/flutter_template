@@ -14,6 +14,7 @@ class AppScreen extends StatelessWidget {
     return MaterialApp.router(
       title: 'Flutter Template',
       theme: lightTheme,
+      
       routerConfig: appRoute.config(
         navigatorObservers: () => [TalkerRouteObserver(GetIt.I<Talker>())],
       ),
