@@ -10,6 +10,7 @@ environment:
 dependencies:
   auto_route: ^10.1.0+1
   bloc: ^9.0.0
+  cached_network_image: ^3.4.1
   cupertino_icons: ^1.0.8
   dio: ^5.8.0+1
   equatable: ^2.0.7
@@ -17,6 +18,8 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^9.1.1
   flutter_dotenv: ^5.2.1
+  flutter_localizations:
+    sdk: flutter
   flutter_native_splash: ^2.4.6
   flutter_secure_storage: ^9.2.4
   flutter_svg: ^2.2.0
@@ -26,6 +29,7 @@ dependencies:
   intl: ^0.20.2
   json_annotation: ^4.9.0
   path_provider: ^2.1.5
+  retrofit: ^4.5.0
   talker: ^4.9.1
   talker_bloc_logger: ^4.9.1
   talker_dio_logger: ^4.9.1
@@ -34,13 +38,14 @@ dependencies:
 
 dev_dependencies:
   auto_route_generator: ^10.2.3
-  build: ^2.5.4
+  build: ^2.4.0
   flutter_launcher_icons: ^0.14.4
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
   json_serializable: ^6.9.5
   lean_builder: ^0.1.0-alpha.13
+  retrofit_generator: ^9.3.0
 
 flutter_launcher_icons:
   android: "lc_icon"
