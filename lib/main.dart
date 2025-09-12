@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:app/app.dart';
 import 'package:app/data/repositories/repositories.dart';
-import 'package:app/service/api_client/api_client.dart';
+import 'package:app/service/service.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -17,38 +17,30 @@ Future<void> main() async {
       runApp(AppScreen());
     },
     (exc, st) {
-      Talker().error(exc, st);
+      GetIt.I<Talker>().error(exc, st);
     },
   );
 }
 
 Future initDependencies() async {
+  final talker = TalkerConfigure.init();
+  GetIt.I.registerSingleton<Talker>(talker);
+
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await dotenv.load(fileName: ".env");
 
-  final talker = Talker(
-    settings: TalkerSettings(
-      enabled: true,
-      useHistory: true,
-      useConsoleLogs: true,
-    ),
-    logger: TalkerLogger(),
-  );
+  final dio = DioConfigure.init(talker: talker);
+  GetIt.I.registerSingleton<Dio>(dio);
 
-  final dio = Dio();
-  final apiClient = ApiClient(dio: dio);
   final secureStorage = SecureStorage();
   final generalStorage = GeneralStorage();
 
-  apiClient.init();
   secureStorage.init();
   await generalStorage.init();
 
-  GetIt.I.registerSingleton<Talker>(talker);
-  GetIt.I.registerSingleton<ApiClient>(apiClient);
-  GetIt.I.registerSingleton<SecureStorage>(secureStorage);
+  GetIt.I.registerSingleton<GeneralStorage>(generalStorage);
   GetIt.I.registerSingleton<GeneralStorage>(generalStorage);
 
   FlutterNativeSplash.remove();

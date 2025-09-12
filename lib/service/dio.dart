@@ -1,22 +1,23 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:talker_dio_logger/talker_dio_logger.dart';
+import 'package:talker_flutter/talker_flutter.dart';
 
-class ApiClient {
-  ApiClient({required this.dio});
+class DioConfigure {
+  static String url = dotenv.env['API']!;
 
-  final Dio dio;
-  final String url = dotenv.env['API']!;
-
-  void init() {
+  static Dio init({Talker? talker}) {
+    final dio = Dio();
     dio.options.baseUrl = url;
     dio.interceptors.add(
       TalkerDioLogger(
         settings: const TalkerDioLoggerSettings(printResponseData: false),
+        talker: talker,
       ),
     );
     dio.interceptors.add(
       InterceptorsWrapper(onRequest: (options, handler) async {}),
     );
+    return dio;
   }
 }
