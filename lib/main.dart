@@ -40,8 +40,6 @@ Future initDependencies() async {
   secureStorage.init();
   await generalStorage.init();
 
+  GetIt.I.registerSingleton<SecureStorage>(secureStorage);
   GetIt.I.registerSingleton<GeneralStorage>(generalStorage);
-  GetIt.I.registerSingleton<GeneralStorage>(generalStorage);
-
-  FlutterNativeSplash.remove();
 }
