@@ -1,0 +1,11 @@
+{
+    "@@locale": "ru",
+    "home": "Главное",
+    "@home": {},
+    "search": "Поиск",
+    "@search": {},
+    "favorite": "Избранные",
+    "@favorite": {},
+    "profile": "Профиль",
+    "@profile": {}
+}

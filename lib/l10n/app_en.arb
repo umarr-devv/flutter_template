@@ -1,0 +1,11 @@
+{
+    "@@locale": "en",
+    "home": "Home",
+    "@home": {},
+    "search": "Search",
+    "@search": {},
+    "favorite": "Favorite",
+    "@favorite": {},
+    "profile": "Profile",
+    "@profile": {}
+}

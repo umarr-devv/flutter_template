@@ -1,57 +1,52 @@
-# GEMINI.md - Project Guidelines for Antygravity
+# AI Development Guidelines (GEMINI.md)
 
-## 📁 Project Structure
+This is an instruction file that must be read and taken into account when generating code, making changes, and designing new features in the project.
 
-### 🚫 Read-Only Directories (Do Not Modify)
+## Rules & Guidelines
 
-* **`/assets`** — Static assets. **Strictly hands-off.**
+### Core Principles
 
-* **`/android`, `/ios`, `/windows`, `/linux`, `/macos`, `/web`** — Platform-specific manifests and configurations. View for context only; do not modify.
+1. **No Hardcoding:** Never hardcode strings, numeric values (paddings, margins, font sizes), colors, and other visual aspects directly in the code.
+2. **Reuse Constants & Themes:** Use already defined constants, themes (`Theme.of(context)`), text styles, and project variables.
+3. **Reuse Widgets:** Always check for existing basic UI components (including those in the `shared/` folder) before creating new ones to avoid duplicating common UI.
+4. **Reuse Dependencies:** Use already added packages to solve tasks, avoid adding new packages with similar functionality if they already exist in the project.
+5. **Strict Structure:** When creating new files and classes, strictly follow the established architecture and directory structure. Files must be located in their logical and intended folders.
+6. **No `setState`:** Never use `setState` for state management in the UI. For local reactive state of widgets, use `ValueNotifier` + `ValueListenableBuilder`. No exceptions are allowed.
+7. **Styling via `ThemeData`:** Do not set styles, colors, and fonts via separate parameters of widgets. All visual settings and colors must be inherited from the global `ThemeData` object. UI customization should be done by configuring global themes.
 
-### 🏗️ Core Application (`/lib`)
+### Additional Rules
 
-This is the primary workspace for logic and UI changes.
-
-* **`/blocs`** — Global State Management (App-wide Blocs).
-* **`/core`** — Fundamental application components.
-* **`/router`** — Navigation and routing configurations.
-* **`/data`** — Data layer.
-* **`/repositories`** — Data abstraction and API interactions.
-* **`/features`** — Feature-based modules.
-* **`/[feature_name]`** — Isolated logic for a specific screen.
-* **`view.dart`** — Main UI entry point for the feature.
-* **`/blocs`** — Local state management for this feature.
-* **`/widgets`** — Feature-specific reusable UI components.
-* **`/service`** — Internal and external service integrations.
-* **`/shared`** — UI components and logic shared across multiple features.
-* **`/utils`** — Helper functions and utility classes.
-* **`app.dart`** — The root widget of the application.
-* **`main.dart`** — The execution entry point.
-
-### ⚙️ Configuration Files (Read-Only)
-
-* **`pubspec.yaml` / `pubspec.lock`** — Dependency management. **Do not modify.**
-* **`.env`** — Environment variables.
-* **`.gitignore`** — Git exclusion rules.
-* **`build.yaml`** — Code generation settings.
-* **`analysis_options.yaml`** — Linter and static analysis rules.
-* **`README.md`** — Project overview.
+1. **Performance (`const`):** Maximize the use of `const` constructors for widgets, arrays, and objects to minimize rebuilds.
+2. **Strict Typing:** Do not use `dynamic` and avoid `var` (unless the type is obvious from the right-hand side). Explicitly specify types for return values, callback parameters, and lists.
+3. **Small Widgets:** Break down complex `build` methods into smaller ones by creating separate Stateless or ValueListenable widgets, isolating the rendering logic.
+4. **Layer Separation:** Business logic elements and data layer components should not import UI libraries (e.g., `flutter/material.dart`). The UI (screens) should not contain raw HTTP logic.
+5. **Null Safety:** Avoid force unwrapping (`!`), use safe extraction (`?` or `if (... != null)`).
 
 ---
 
-## 📜 Development Rules & Guidelines
+## Architecture and Project Structure
 
-1. **Prefer Existing Solutions:** Always check for existing third-party libraries or internal widgets before writing custom code. Reuse is a priority.
-2. **Strict Theming:** Use colors and text styles **exclusively** from the global theme or the `theme.dart` file. Hardcoded values are prohibited.
-3. **Dependency Awareness:** Check `pubspec.yaml` to ensure compatibility and avoid using deprecated versions of packages.
-4. **Language Standard:** Use **English only** for all code, comments, file naming, directory naming, and variables.
-5. **State Management:** Follow the BLoC pattern consistently as structured in the directories.
+The project is logically divided into modules for the data layer, global core, and features (Feature-wise structure). Without tying to specific screens, the project tree looks as follows:
 
----
+### `lib/`
 
-## 🛠️ Coding Style & Standards
+* **`blocs/`**
+  Global business logic (BLoC / Cubit / other state managers) that affects the application as a whole, rather than a single specific feature (e.g., user session listeners, global network status, app settings).
 
-* **Naming:** Use `PascalCase` for classes, `camelCase` for variables/methods, and `snake_case` for file names.
-* **Architecture:** Strictly separate UI (View) from Business Logic (BLoC).
-* **Clean Code:** Keep widgets small and modular. If a widget exceeds 100 lines, consider breaking it down into smaller components in the `/widgets` folder of the feature.
-* **Async Operations:** Always handle loading and error states within the BLoC and reflect them in the UI.
+* **`core/`**
+  The core of the application. Contains configuration files, system utilities, basic abstract classes, global theme settings (ThemeUtils, ColorScheme), router (navigation) configurations, and network clients. This is the low-level layer of the application.
+
+* **`data/`**
+  Centralized data layer. Stores models (Data Entities / DTOs), repositories (interface implementations), local databases, data parsing, and data sources (API clients). This layer provides data to the other layers of the application.
+
+* **`features/`**
+  Isolated user scenarios and application sections (features). Each functionality is encapsulated within its own folder, which may contain screens, local widgets, feature-specific logic, controllers/BLoCs. Features should be as independent from each other as possible.
+
+* **`l10n/`**
+  Localization directory. Stores translation files (e.g., ARB) and generated classes for multi-language support. All text strings in the UI must come exclusively from here.
+
+* **`shared/`**
+  Shared, reusable widgets and atomic UI components. This is where ready-made buttons, inputs, dialogs, and cards are placed, to be used universally across different `features/`.
+
+* **`app.dart` & `main.dart`**
+  Entry point, basic dependencies injection, application initialization (launching the main widget of the tree `App`, attaching the router and localizations).
