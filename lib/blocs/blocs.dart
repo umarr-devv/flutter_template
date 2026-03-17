@@ -1,2 +1,1 @@
-export 'locale/locale_cubit.dart';
-export 'theme/theme_cubit.dart';
+export 'settings/settings_cubit.dart';

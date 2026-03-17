@@ -1,22 +1,27 @@
+import 'dart:ui';
+
 import 'package:equatable/equatable.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/painting.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'locale_cubit.g.dart';
-part 'locale_state.dart';
+part 'settings_cubit.g.dart';
+part 'settings_state.dart';
 
-class LocaleCubit extends HydratedCubit<LocaleState> {
-  LocaleCubit(List<Locale> supportedLocales)
+class SettingsCubit extends HydratedCubit<SettingsState> {
+  SettingsCubit(List<Locale> supportedLocales)
     : super(
-        LocaleState(
+        SettingsState(
           languageCode: _getDefaultLocale(supportedLocales).languageCode,
+          isDarkTheme: _getIsDarkTheme(),
         ),
       );
 
+  void switchTheme() {
+    emit(state.copyWith(isDarkTheme: !state.isDarkTheme));
+  }
+
   void setLocale(Locale locale) {
-    emit(LocaleState(languageCode: locale.languageCode));
+    emit(state.copyWith(languageCode: locale.languageCode));
   }
 
   static Locale _getDefaultLocale(List<Locale> supportedLocales) {
@@ -25,17 +30,20 @@ class LocaleCubit extends HydratedCubit<LocaleState> {
     final isSupported = supportedLocales.any(
       (locale) => locale.languageCode == systemLocale.languageCode,
     );
-
     return isSupported ? systemLocale : supportedLocales.first;
   }
 
-  @override
-  LocaleState? fromJson(Map<String, dynamic> json) {
-    return LocaleState.fromJson(json);
+  static bool _getIsDarkTheme() {
+    return Brightness.dark == PlatformDispatcher.instance.platformBrightness;
   }
 
   @override
-  Map<String, dynamic>? toJson(LocaleState state) {
+  SettingsState? fromJson(Map<String, dynamic> json) {
+    return SettingsState.fromJson(json);
+  }
+
+  @override
+  Map<String, dynamic>? toJson(SettingsState state) {
     return state.toJson();
   }
 }

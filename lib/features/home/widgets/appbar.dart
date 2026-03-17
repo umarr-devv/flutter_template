@@ -14,13 +14,13 @@ class HomeAppBar extends StatelessWidget {
       actions: [
         IconButton(
           onPressed: () {
-            context.read<ThemeCubit>().switchTheme();
+            context.read<SettingsCubit>().switchTheme();
           },
           icon: Icon(Icons.dark_mode),
         ),
         IconButton(
           onPressed: () {
-            final cubit = context.read<LocaleCubit>();
+            final cubit = context.read<SettingsCubit>();
             if (cubit.state.languageCode == 'ru') {
               cubit.setLocale(Locale('en'));
             } else {

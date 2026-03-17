@@ -12,27 +12,21 @@ class AppScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ThemeCubit()),
         BlocProvider(
-          create: (context) => LocaleCubit(AppLocalizations.supportedLocales),
+          create: (context) => SettingsCubit(AppLocalizations.supportedLocales),
         ),
       ],
-      child: BlocBuilder<ThemeCubit, ThemeState>(
-        builder: (context, theme) {
-          return BlocBuilder<LocaleCubit, LocaleState>(
-            builder: (context, locale) {
-              return MaterialApp.router(
-                title: 'App',
-                theme: lightTheme,
-                darkTheme: darkTheme,
-                themeMode: theme.themeMode,
-                debugShowCheckedModeBanner: false,
-                locale: locale.locale,
-                localizationsDelegates: AppLocalizations.localizationsDelegates,
-                supportedLocales: AppLocalizations.supportedLocales,
-                routerConfig: AppRouter.router,
-              );
-            },
+      child: BlocBuilder<SettingsCubit, SettingsState>(
+        builder: (context, state) {
+          final theme = state.isDarkTheme ? darkTheme : lightTheme;
+          return MaterialApp.router(
+            title: 'App',
+            theme: theme,
+            debugShowCheckedModeBanner: false,
+            locale: state.locale,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
+            routerConfig: AppRouter.router,
           );
         },
       ),
