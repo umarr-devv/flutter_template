@@ -1,9 +1,7 @@
 import 'package:app/core/paths/paths.dart';
 import 'package:hive_ce_flutter/hive_flutter.dart';
-import 'package:injectable/injectable.dart';
 import 'package:path/path.dart';
 
-@lazySingleton
 class Storage {
   late final Box _box;
 
