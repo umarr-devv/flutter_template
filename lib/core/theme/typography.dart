@@ -1,3 +1,3 @@
-class AppTextStyles {
+class AppTypography {
   final String fontFamily = 'Manrope';
 }
