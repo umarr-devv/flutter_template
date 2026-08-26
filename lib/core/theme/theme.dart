@@ -11,7 +11,6 @@ class AppTheme {
   ThemeData get toTheme {
     return ThemeData(
       brightness: colors.brightness,
-      fontFamily: typography.fontFamily,
       colorScheme: colors.toColorScheme(),
       bottomNavigationBarTheme: BottomNavigationBarThemeData(
         type: BottomNavigationBarType.fixed,

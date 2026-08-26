@@ -56,33 +56,11 @@ flutter:
   assets:
     - ".env"
 
-    - "assets/svg/house.svg"
-    - "assets/svg/search.svg"
-    - "assets/svg/heart.svg"
-    - "assets/svg/user.svg"
-
     - "assets/images/a12_branding.png"
     - "assets/images/a12_splash.png"
     - "assets/images/branding.png"
     - "assets/images/splash.png"
 
-  fonts:
-    - family: Manrope
-      fonts:
-        - asset: "assets/fonts/Manrope/Manrope-ExtraBold.ttf"
-          weight: 800
-        - asset: "assets/fonts/Manrope/Manrope-Bold.ttf"
-          weight: 700
-        - asset: "assets/fonts/Manrope/Manrope-SemiBold.ttf"
-          weight: 600
-        - asset: "assets/fonts/Manrope/Manrope-Medium.ttf"
-          weight: 500
-        - asset: "assets/fonts/Manrope/Manrope-Regular.ttf"
-          weight: 400
-        - asset: "assets/fonts/Manrope/Manrope-Light.ttf"
-          weight: 300
-        - asset: "assets/fonts/Manrope/Manrope-ExtraLight.ttf"
-          weight: 200
 
 flutter_native_splash:
   color: "#ffffff"

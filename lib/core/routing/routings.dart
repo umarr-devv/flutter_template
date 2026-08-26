@@ -3,10 +3,6 @@ import 'package:go_router/go_router.dart';
 
 enum Routings {
   init,
-  home,
-  favorite,
-  profile,
-  search,
   logs;
 
   void go(
