@@ -24,4 +24,7 @@ dart run flutter_native_splash:create
 
 ```bash
 flutter gen-l10n
-```
+
+```bash
+dart run flutter_launcher_icons
+..
