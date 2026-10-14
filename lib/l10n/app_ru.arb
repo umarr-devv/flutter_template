@@ -1,11 +1,23 @@
 {
     "@@locale": "ru",
-    "home": "Главное",
+    "home": "Главная",
     "@home": {},
     "search": "Поиск",
     "@search": {},
     "favorite": "Избранные",
     "@favorite": {},
     "profile": "Профиль",
-    "@profile": {}
+    "@profile": {},
+    "detail": "Подробнее",
+    "@detail": {},
+    "appName": "Название приложения",
+    "@appName": {},
+    "packageName": "Название пакета",
+    "@packageName": {},
+    "version": "Версия",
+    "@version": {},
+    "buildNumber": "Номер сборки",
+    "@buildNumber": {},
+    "toggle": "Переключить",
+    "@toggle": {}
 }

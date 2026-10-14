@@ -7,5 +7,17 @@
     "favorite": "Favorite",
     "@favorite": {},
     "profile": "Profile",
-    "@profile": {}
+    "@profile": {},
+    "detail": "Detail",
+    "@detail": {},
+    "appName": "App Name",
+    "@appName": {},
+    "packageName": "Package Name",
+    "@packageName": {},
+    "version": "Version",
+    "@version": {},
+    "buildNumber": "Build Number",
+    "@buildNumber": {},
+    "toggle": "Toggle",
+    "@toggle": {}
 }

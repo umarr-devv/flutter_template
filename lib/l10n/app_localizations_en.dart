@@ -1,6 +1,5 @@
 // ignore: unused_import
 import 'package:intl/intl.dart' as intl;
-
 import 'app_localizations.dart';
 
 // ignore_for_file: type=lint
@@ -20,4 +19,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get profile => 'Profile';
+
+  @override
+  String get detail => 'Detail';
+
+  @override
+  String get appName => 'App Name';
+
+  @override
+  String get packageName => 'Package Name';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get buildNumber => 'Build Number';
+
+  @override
+  String get toggle => 'Toggle';
 }

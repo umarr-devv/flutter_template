@@ -1,47 +1,22 @@
 import 'dart:async';
 
-import 'package:app/app.dart';
-import 'package:app/core/api/api.dart';
-import 'package:app/core/paths/paths.dart';
-import 'package:app/core/setups/setups.dart';
-import 'package:app/data/storages/storages.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:app/app/app.dart';
+import 'package:app/app/di.dart';
+import 'package:app/app/errors/error_handlers.dart';
 import 'package:get_it/get_it.dart';
+import 'package:material_ui/material_ui.dart';
+import 'package:talker/talker.dart';
 
-Future<void> main() async {
-  final talker = TalkerSetup.init();
-  GetIt.I.registerSingleton(talker);
-
+void main() {
   runZonedGuarded(
     () async {
-      await initDependencies();
-      runApp(AppScreen());
+      WidgetsFlutterBinding.ensureInitialized();
+      await setupDependencies();
+      await setupErrors();
+      runApp(App());
     },
     (exc, st) {
-      talker.error(exc, st);
+      GetIt.I<Talker>().error(exc, st);
     },
   );
-}
-
-Future initDependencies() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  // FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
-
-  await dotenv.load(fileName: ".env");
-
-  final paths = AppPaths();
-  await paths.init();
-
-  final storage = Storage();
-  final secureStorage = SecureStorage();
-
-  final dio = DioSetup.init();
-  await HydratedStorageSetup.init(paths);
-
-  final client = RestClient(dio);
-
-  GetIt.I.registerSingleton(storage);
-  GetIt.I.registerSingleton(secureStorage);
-  GetIt.I.registerSingleton(client);
 }
